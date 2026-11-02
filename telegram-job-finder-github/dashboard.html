@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Telegram Job Finder</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">TJ</div><div><b>Job Finder</b><small>Telegram assistant</small></div></div>
+      <nav class="nav"><a class="nav-item active" href="#overview">▦ <span>Dashboard</span></a><a class="nav-item" href="#jobs">▤ <span>Saved jobs</span></a><a class="nav-item" href="#settings">⚙ <span>Search settings</span></a></nav>
+      <div class="sidebar-note"><b>Search profile</b><span>Computer Science</span><span>Software · IT · AI · Data · Security</span><small>English + Arabic</small></div>
+      <div class="sidebar-bottom">Your data stays in this browser.</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div><div class="eyebrow">YOUR PERSONAL JOB SEARCH</div><h1>Job dashboard</h1><p>Collect vacancies from Telegram and keep your applications organized.</p></div><div class="top-actions"><button id="backupButton" class="btn light">Download backup</button><button id="exportButton" class="btn light">Export CSV</button></div></header>
+
+      <section class="scan-panel" id="overview">
+        <div class="scan-copy"><div class="eyebrow light-text">TELEGRAM SCANNER</div><h2>Scan a job group</h2><p>Choose an open Telegram Web tab. The scanner checks messages currently loaded in that chat and saves relevant listings here.</p></div>
+        <div class="scan-controls"><label for="telegramTab">Telegram Web tab</label><div class="scan-row"><select id="telegramTab"><option value="">Looking for open Telegram tabs…</option></select><button id="refreshTabs" class="btn outline">↻</button></div><button id="scanButton" class="btn scan-btn">Scan selected chat <span>→</span></button><div id="scanStatus" class="scan-status" role="status">Open a Telegram group in another tab, then scan it here.</div></div>
+      </section>
+
+      <section class="metrics" aria-label="Application summary">
+        <article class="metric"><span class="metric-label">TOTAL MATCHES</span><strong id="metricTotal">0</strong><small>Saved opportunities</small></article>
+        <article class="metric"><span class="metric-label">TO REVIEW</span><strong id="metricReview">0</strong><small>New matches to check</small></article>
+        <article class="metric"><span class="metric-label">TO APPLY</span><strong id="metricApply">0</strong><small>Shortlisted opportunities</small></article>
+        <article class="metric"><span class="metric-label">APPLIED / INTERVIEW</span><strong id="metricProgress">0</strong><small>Applications in progress</small></article>
+      </section>
+
+      <section class="section-head" id="jobs"><div><div class="eyebrow">YOUR OPPORTUNITIES</div><h2>Saved job listings</h2><p id="resultSummary">0 jobs saved</p></div><div class="view-actions"><label class="file-btn">Import CSV / backup<input id="importFile" type="file" accept=".csv,.json,application/json,text/csv"></label><button id="exportFilteredButton" class="btn light">Export filtered</button></div></section>
+
+      <section class="filters card">
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search job title, company, skills or message…"></div>
+        <div class="filter-grid">
+          <label>Category<select id="categoryFilter"><option value="all">All categories</option></select></label>
+          <label>Application status<select id="statusFilter"><option value="all">All statuses</option><option value="to_review">To review</option><option value="to_apply">To apply</option><option value="applied">Applied</option><option value="interview">Interview</option><option value="offer">Offer</option><option value="rejected">Rejected</option></select></label>
+          <label>Location<select id="locationFilter"><option value="all">All locations</option><option>Kuwait</option><option>Remote</option><option>Kuwait / Remote</option><option>Not specified</option></select></label>
+          <label>Language<select id="languageFilter"><option value="all">All languages</option><option>Arabic</option><option>English</option><option>Bilingual</option></select></label>
+          <label>Telegram group<select id="groupFilter"><option value="all">All groups</option></select></label>
+          <label>Sort by<select id="sortFilter"><option value="score">Highest match</option><option value="newest">Recently found</option><option value="oldest">Oldest first</option><option value="title">Job title A–Z</option></select></label><label>Minimum match<select id="scoreFilter"><option value="0">Any score</option><option value="50">50%+</option><option value="60">60%+</option><option value="70">70%+</option><option value="80">80%+</option><option value="90">90%+</option></select></label>
+        </div>
+        <div class="filter-bottom"><span id="visibleCount">Showing 0 jobs</span><button id="resetFilters" class="link-btn">Reset filters</button></div>
+      </section>
+
+      <section id="jobsList" class="jobs-list"><div class="empty-state"><div class="empty-symbol">⌕</div><h3>No jobs saved yet</h3><p>Open a Telegram job group and scan the messages to start building your list.</p></div></section>
+
+      <section class="settings-section card" id="settings">
+        <button id="settingsToggle" class="settings-toggle" aria-expanded="false"><span><b>Search settings</b><small>Customize bilingual keywords and exclusions</small></span><span id="settingsChevron">＋</span></button>
+        <div id="settingsBody" class="settings-body hidden">
+          <div class="settings-columns">
+            <div><label for="keywords">Computer Science / IT keywords</label><textarea id="keywords" rows="10"></textarea><button id="loadRecommended" class="link-btn">Load recommended bilingual keywords</button></div>
+            <div><label for="excludeRoles">Unrelated job titles to exclude</label><textarea id="excludeRoles" rows="7"></textarea><label for="excludeWords" class="spaced-label">Words to exclude (optional)</label><input id="excludeWords" type="text" placeholder="unpaid, 5+ years"></div>
+          </div>
+          <div class="settings-footer"><label>Minimum match score<select id="minScore"><option value="35">35% — show more</option><option value="50">50% — balanced</option><option value="65">65% — stricter</option><option value="80">80% — very strict</option></select></label><label class="check-label"><input id="autoScan" type="checkbox"><span><b>Watch open Telegram tabs</b><small>Automatically check new messages in any open Telegram Web chat while enabled.</small></span></label><button id="saveSettings" class="btn primary">Save search settings</button></div>
+          <div id="settingsStatus" class="inline-status" role="status"></div>
+        </div>
+      </section>
+
+      <footer class="footer">Telegram Job Finder v2.0 · Local rule-based matching · Review every vacancy before applying.</footer>
+    </main>
+  </div>
+  <input id="hiddenImport" type="file" accept=".csv,.json" hidden>
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Personal job-search data (never commit real Telegram messages or backups)
+*.csv
+telegram-job-finder-backup*.json
+job-finder-backup*.json
+
+# Local development / operating-system files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

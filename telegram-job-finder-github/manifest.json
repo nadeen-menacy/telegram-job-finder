@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Telegram Job Finder — All-in-One",
+  "version": "2.0.0",
+  "description": "Bilingual Computer Science job finder with relevance filters, dashboard, CSV export and application tracking.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://web.telegram.org/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Telegram Job Finder Dashboard"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.telegram.org/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
